@@ -1,5 +1,8 @@
 # aLIEz
 
+2024-1-5: 一看commit记录，三年前的项目了，三年后改了一些代码，现在不依赖系统tools.jar了，也不会直接transformer去改bytecode了
+          现在是直接dump出来自己分析
+
 杀内存马的
 
 java -jar aLIEz.jar JVMID aLIEz-agent-1.0-SNAPSHOT.jar
