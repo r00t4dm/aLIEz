@@ -36,10 +36,8 @@ public class CleanMemShellAgentMainAttach {
         System.out.println("tools.jar path: " + toolsJar.getAbsolutePath());
 
 
-
         URL[] urls = new URL[] {toolsJar.toURI().toURL()};
         Class<?> vmClass = new URLClassLoader(urls).loadClass(TOOLS_CLASS_NAME);
-//        Class<?> vmClass = Class.forName(TOOLS_CLASS_NAME);
         Method attachMethod = vmClass.getDeclaredMethod("attach", String.class);
         Object vmInstance = attachMethod.invoke(null, vmdId);
         Method loadAgentMethod = vmClass.getDeclaredMethod("loadAgent", String.class);
@@ -61,18 +59,12 @@ public class CleanMemShellAgentMainAttach {
         System.out.println("tools.jar path: " + toolsJar.getAbsolutePath());
         URL[] urls = new URL[] {toolsJar.toURI().toURL()};
         Class<?> vmClass = new URLClassLoader(urls).loadClass(TOOLS_CLASS_NAME);
-
-//        Class<?> vmClass = Class.forName(TOOLS_CLASS_NAME);
         Method listMethod = vmClass.getDeclaredMethod("list");
         List<?> vms = (List<?>) listMethod.invoke(null);
         for (Object vmObject : vms) {
-
             Class<?> vmdClass = vmObject.getClass();
-//            Class<?> vmdClass = new URLClassLoader(urls).loadClass(VMD_CLASS_NAME);
-//            Class<?> vmdClass = Class.forName(VMD_CLASS_NAME);
             Method idMethod = vmdClass.getMethod("id");
             Method displayNameMethod = vmdClass.getMethod("displayName");
-
             String id = (String) idMethod.invoke(vmObject);
             String displayName = (String) displayNameMethod.invoke(vmObject);
             System.out.println(id + " : " + displayName);
